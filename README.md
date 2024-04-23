@@ -7,7 +7,8 @@ El problema también requiere un poco de conocimiento previo o investigación so
 
 ## Pre-requisitos
 - Tener acceso a una instancia de Digital Ocean
-- Un Public/Private keyset para acceder a la instancia
+  - Un Public/Private keyset para acceder a la instancia
+  - Utilizar comando **ssh -i path_to_private_key root@ipaddress**
 - Acceso a la base de datos read-only de PostgreSQL
 
 ## Objetivos de la prueba
