@@ -6,20 +6,24 @@ El problema es el siguiente: dado un dataset en una base de datos de PostgreSQL,
 El problema también requiere un poco de conocimiento previo o investigación sobre configuración de MongoDB, sistemas POSIX (Linux/Unix/macOS), llaves de SSH, droplets de Digital Ocean, comandos SQL y manejo de bases de dato relaciones como PostgreSQL.
 
 ## Pre-requisitos
-- Tener acceso a una instancia de Digital Ocean
+- Tener acceso a una instancia (Droplet) de Digital Ocean
   - Un Public/Private keyset para acceder a la instancia
   - Utilizar comando **ssh -i path_to_private_key root@ipaddress**
 - Acceso a la base de datos read-only de PostgreSQL
 
 ## Objetivos de la prueba
 - Installar MongoDB localmente
-- Crear una solución que carge las órdenes de PostgreSQL a una colección de Mongo
-- Todas las órdenes se insertan sin duplicados, incluso cuando la solución se corre mútliples veces.
-- La información del producto
-- Product info joined from product table
-- Subtotal, Tax y Total se calculan para cada órden
-- La marca (**brand**) más popular se calcula para cada órden insertada
-- Considerar que **is_promotion_day** debe de ser true/false dependiendo en la fecha de la órden y el campo **client promotion_date**
+- Hacer un fork de este repo.
+    - Clonar el fork en la instancia asignada.
+    - Trabajar la solución en el fork.
+- La solución debe:
+    - Cargar las órdenes de la base de datos de PostgreSQL y transformarlas a una colección de Mongo
+    - Todas las órdenes se insertan sin duplicados, incluso cuando la solución se corre mútliples veces.
+    - Incluir la información del producto
+    - Product info joined from product table
+    - Subtotal, Tax y Total se calculan para cada órden
+    - La marca (**brand**) más popular se calcula para cada órden insertada
+    - Considerar que **is_promotion_day** debe de ser true/false dependiendo en la fecha de la órden y el campo **client promotion_date**
 
 
 ## Read Schema
