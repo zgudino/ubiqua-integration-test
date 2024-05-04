@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+dnspython = "==2.6.1"
+psycopg = "==3.1.18"
+psycopg-binary = "==3.1.18"
+pymongo = "==4.7.1"
+
+[dev-packages]
+typing-extensions = "*"
+
+[requires]
+python_version = "3.9"
+python_full_version = "3.9.6"
