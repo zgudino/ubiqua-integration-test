@@ -1,13 +1,18 @@
 import locale
+import logging
 import os
 import threading
 from contextlib import contextmanager
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from datetime import datetime
 from typing import Tuple
 
 import psycopg
 from psycopg.rows import dict_row
+from pymongo import MongoClient
+from pymongo.errors import DuplicateKeyError, BulkWriteError
+
+logging.basicConfig(format='%(asctime)s [%(levelname)s] - %(message)s', level=logging.INFO)
 
 
 @dataclass
@@ -118,7 +123,20 @@ if __name__ == "__main__":
                     )
                 )
 
-            # TODO: Insert 'orders' to a MongoDB collection
-            print(orders)
-            print("")
-            print(f"Total order(s) extracted: {len(orders)}")
+    client = MongoClient(mongodb_connection_string)
+    database = client.get_database("dcnhum24eom32t")
+    orders_collection = database.get_collection("orders")
+    # Transforms a list of Order objects into a list of dictionaries
+    orders_documents = list(map(lambda o: asdict(o), orders))
+
+    logging.info({"count": len(orders_documents), "documents": orders_documents})
+
+    try:
+        orders_collection.create_index("uid", unique=True)
+        orders_collection.insert_many(orders_documents, ordered=False)
+    except DuplicateKeyError as error:
+        # Unique index on the 'uid' field already exists
+        logging.debug(error.details)
+    except BulkWriteError as error:
+        # Gracefully ignore 'Collection.insert_many(...)' error due to duplicate keys
+        logging.debug(error.details)
