@@ -8,11 +8,13 @@ from datetime import datetime
 from typing import Tuple
 
 import psycopg
+from dotenv import load_dotenv
 from psycopg.rows import dict_row
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError, BulkWriteError
 
 logging.basicConfig(format='%(asctime)s [%(levelname)s] - %(message)s', level=logging.INFO)
+load_dotenv()
 
 
 @dataclass
