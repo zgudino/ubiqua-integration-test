@@ -5,7 +5,6 @@ import threading
 from contextlib import contextmanager
 from dataclasses import dataclass, asdict
 from datetime import datetime
-from typing import Tuple
 
 import psycopg
 from dotenv import load_dotenv
@@ -41,7 +40,7 @@ class Order:
     total: float
     is_promotion_day: bool
     most_popular_brand: str
-    order_items: Tuple[OrderItem, ...]
+    order_items: tuple[OrderItem, ...]
 
 
 @contextmanager
